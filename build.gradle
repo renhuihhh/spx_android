@@ -1,0 +1,47 @@
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.3'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+
+// Define versions in a single place
+ext {
+    // Sdk and tools
+    minSdkVersion = 14
+    targetSdkVersion = 22
+    compileSdkVersion = 23
+    buildToolsVersion = '23.0.2'
+
+    // App dependencies
+    supportLibraryVersion = '23.4.0'
+    junitVersion = '4.12'
+
+    // Custom
+    retrofitVersion = '2.1.0'
+    gsonConvertVersion = '2.1.0'
+    okHttpVersion = '3.4.1'
+    picassoVersion = '2.5.2'
+    butterKnifeVersion = '8.1.0'
+    javapoetVersion = '1.7.0'
+    otto_eventbus = '1.3.8'
+    robolectricVersion = '3.1.2'
+
+    ageraLibrariesVersion = '1.2.0-beta2'
+}
