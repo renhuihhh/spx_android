@@ -22,9 +22,17 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile "junit:junit:$rootProject.ext.junitVersion"
     compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     compile project(':library')
     compile "com.jakewharton:butterknife:$rootProject.butterKnifeVersion"
     apt "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
+
+    // JUnit
+    testCompile "junit:junit:$rootProject.ext.junitVersion"
+    // Robolectric + Support v4
+    testCompile 'org.robolectric:robolectric:3.1.2'
+    testCompile "org.khronos:opengl-api:gl1.1-android-2.1_r1"
+    // Mockito
+    testCompile "org.mockito:mockito-core:1.9.5"
+    androidTestCompile 'junit:junit:4.12'
 }
