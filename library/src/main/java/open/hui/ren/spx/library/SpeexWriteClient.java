@@ -2,6 +2,7 @@ package open.hui.ren.spx.library;
 
 import android.util.Log;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -39,12 +40,12 @@ public class SpeexWriteClient {
 
     }
 
-    public void start(String fileName) {
+    public void start(File file) {
 
-        init(fileName);
+        init(file);
     }
 
-    private void init(String fileName) {
+    private void init(File file) {
         // File file = new File(saveAsFileName);
 
         // xiaomi
@@ -61,7 +62,7 @@ public class SpeexWriteClient {
         speexWriter = new OggSpeexWriter(mode, sampleRate, channels, nframes, vbr);
 
         try {
-            speexWriter.open(fileName);
+            speexWriter.open(file);
 
             speexWriter.writeHeader("Encoded with:test by gauss ");
         } catch (IOException e) {

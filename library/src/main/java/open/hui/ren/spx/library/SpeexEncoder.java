@@ -2,6 +2,7 @@ package open.hui.ren.spx.library;
 
 import android.util.Log;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,19 +23,19 @@ public class SpeexEncoder implements Runnable {
 
 	List<ReadData> list = null;
 	private volatile boolean isRecording;
-	private String fileName;
+	private File file;
 
-	public SpeexEncoder(String fileName) {
+	public SpeexEncoder(File file) {
 		super();
 		speex.init();
 		list = Collections.synchronizedList(new LinkedList<ReadData>());
-		this.fileName = fileName;
+		this.file = file;
 	}
 
 	public void run() {
 
 		// 启动writer线程写speex文件。
-		SpeexWriter fileWriter = new SpeexWriter(fileName);
+		SpeexWriter fileWriter = new SpeexWriter(file);
 		Thread consumerThread = new Thread((Runnable) fileWriter);
 		fileWriter.setRecording(true);
 		consumerThread.start();

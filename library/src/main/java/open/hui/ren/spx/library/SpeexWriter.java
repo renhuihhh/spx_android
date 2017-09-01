@@ -2,6 +2,7 @@ package open.hui.ren.spx.library;
 
 import android.util.Log;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,13 +22,13 @@ public class SpeexWriter implements Runnable {
 
     public static int write_packageSize = 1024;
 
-    public SpeexWriter(String fileName) {
+    public SpeexWriter(File file) {
         super();
         list = Collections.synchronizedList(new LinkedList<processedData>());
 
         client.setSampleRate(8000);
 
-        client.start(fileName);
+        client.start(file);
     }
 
     public void run() {

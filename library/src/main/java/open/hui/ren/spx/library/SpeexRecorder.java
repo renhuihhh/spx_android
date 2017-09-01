@@ -5,6 +5,8 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.util.Log;
 
+import java.io.File;
+
 public class SpeexRecorder extends Thread {
 
 	private volatile boolean isRecording;
@@ -12,7 +14,7 @@ public class SpeexRecorder extends Thread {
 	private static final int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
 	private static final String TAG = "SpeexRecorder";
 	public static int packagesize = 160;
-	private String fileName = null;
+	private File file = null;
 	private double amplitude = 0;
 	private double DB;
 
@@ -28,7 +30,7 @@ public class SpeexRecorder extends Thread {
 	public void run() {
 		try {
 			// 启动编码线程
-			SpeexEncoder encoder = new SpeexEncoder(this.getFileName());
+			SpeexEncoder encoder = new SpeexEncoder(this.getFile());
 			Thread encodeThread = new Thread(encoder, "SpeexEncoder");
 			encoder.setRecording(true);
 			encodeThread.start();
@@ -116,12 +118,12 @@ public class SpeexRecorder extends Thread {
 		return isRecording;
 	}
 
-	public String getFileName() {
-		return fileName;
+	public File getFile() {
+		return file;
 	}
 
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setFile(File file) {
+		this.file = file;
 	}
 
 	public double getDB() {
