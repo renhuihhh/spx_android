@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -191,90 +190,64 @@ public class MainActivity extends AppCompatActivity {
 
     private void requestAudioPermissions() {
         if (ContextCompat.checkSelfPermission(this,
-            Manifest.permission.RECORD_AUDIO)
-            != PackageManager.PERMISSION_GRANTED) {
-
-            //When permission is not granted by user, show them message why this permission is needed.
+            Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                 Manifest.permission.RECORD_AUDIO)) {
                 Toast.makeText(this, "Please grant permissions to record audio", Toast.LENGTH_LONG)
                      .show();
-
-                //Give user option to still opt-in the permissions
                 ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.RECORD_AUDIO},
                     MY_PERMISSIONS_RECORD_AUDIO);
             } else {
-                // Show user dialog to grant permission to record audio
                 ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.RECORD_AUDIO},
                     MY_PERMISSIONS_RECORD_AUDIO);
             }
-        }//If permission is granted, then go ahead recording audio
-        else if (ContextCompat.checkSelfPermission(this,
+        } else if (ContextCompat.checkSelfPermission(this,
             Manifest.permission.RECORD_AUDIO)
             == PackageManager.PERMISSION_GRANTED) {
-
-            //Go ahead with recording audio now
             recorder.start();
         }
     }
 
     private void requestStoragePermission() {
         if (ContextCompat.checkSelfPermission(this,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED) {
-
-            //When permission is not granted by user, show them message why this permission is needed.
+            Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 Toast.makeText(this, "Please grant permissions to record audio", Toast.LENGTH_LONG)
                      .show();
-
-                //Give user option to still opt-in the permissions
                 ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_WRITE_STORAGE);
             } else {
-                // Show user dialog to grant permission to record audio
                 ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_WRITE_STORAGE);
             }
         } else if (ContextCompat.checkSelfPermission(this,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            == PackageManager.PERMISSION_GRANTED) {
-            //Go ahead with recording audio now
+            Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             startRecoding();
         }
     }
 
-    //Handling callback
     @Override
     public void onRequestPermissionsResult(int requestCode,
         String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_RECORD_AUDIO: {
-                if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay!
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     recorder.start();
                 } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
                     Toast.makeText(this, "Permissions Denied to record audio", Toast.LENGTH_LONG)
                          .show();
                 }
                 return;
             }
             case MY_PERMISSIONS_WRITE_STORAGE: {
-                if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay!
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     startRecoding();
                 } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
                     Toast.makeText(this, "Permissions Denied to write storage", Toast.LENGTH_LONG)
                          .show();
                 }
